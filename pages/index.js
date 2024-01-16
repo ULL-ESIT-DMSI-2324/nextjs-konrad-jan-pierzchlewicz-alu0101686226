@@ -1,18 +1,48 @@
 import Head from "next/head";
 import { useState } from "react";
+import Image from "next/image";
 import styles from "./index.module.css";
 
 export default function Home() {
-  const [count, setCount] = useState(0);
+  const [animalInput, setAnimalInput] = useState("");
+  const [result, setResult] = useState();
+
+  async function onSubmit(event) {
+    event.preventDefault();
+    const response = await fetch("/api/generate", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({ animal: animalInput }),
+    });
+    const data = await response.json();
+    setResult(data.result);
+    setAnimalInput("");
+  }
 
   return (
     <div>
       <Head>
-        <title>Home Page</title>
+        <title>OpenAI Quickstart</title>
+        <link rel="icon" href="/dog.png" />
       </Head>
-      <h1>Welcome to the Home Page</h1>
-      <p>Current count: {count}</p>
-      <button onClick={() => setCount(count + 1)}>Increment</button>
+
+      <main className={styles.main}>
+        <Image alt="dog icon" src="/dog.png" width="100" height="100" className={styles.icon} />
+        <h3>Name my pet</h3>
+        <form onSubmit={onSubmit}>
+          <input
+            type="text"
+            name="animal"
+            placeholder="Enter an animal"
+            value={animalInput}
+            onChange={(e) => setAnimalInput(e.target.value)}
+          />
+          <input type="submit" value="Generate names" />
+        </form>
+        <div className={styles.result}>{result}</div>
+      </main>
     </div>
   );
 }

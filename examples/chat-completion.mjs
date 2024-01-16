@@ -8,7 +8,8 @@ async function main() {
     model: "gpt-3.5-turbo",
   });
 
-  console.log(completion.choices[0]);
+  console.log(completion);
 }
 
 main();
+

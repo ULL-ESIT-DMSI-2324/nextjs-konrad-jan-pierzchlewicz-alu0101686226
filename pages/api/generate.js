@@ -16,7 +16,7 @@ export default async function (req, res) {
     // Call the OpenAI API to generate the response
     const response = await openai.complete({
       engine: 'davinci',
-      prompt: prompt,
+      prompt: prompt,     // prompt from `generatePrompt`
       maxTokens: 100,
       temperature: 0.7,
       n: 1,
@@ -30,11 +30,12 @@ export default async function (req, res) {
     res.status(200).json({ generatedText });
   } catch (error) {
     console.error(error);
-    res.status(500).json({ error: 'An error occurred' });
+    res.status(200).json({ result: completion.data.choices[0].text });
   }
 }
 
 function generatePrompt(animal) {
   const prompt = `I want to learn more about ${animal}. Can you tell me some interesting facts about ${animal}?`;
+  console.log(prompt);
   return prompt;
 }
