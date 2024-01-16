@@ -3,5 +3,16 @@ import { useState } from "react";
 import styles from "./index.module.css";
 
 export default function Home() {
-  // Write the code
+  const [count, setCount] = useState(0);
+
+  return (
+    <div>
+      <Head>
+        <title>Home Page</title>
+      </Head>
+      <h1>Welcome to the Home Page</h1>
+      <p>Current count: {count}</p>
+      <button onClick={() => setCount(count + 1)}>Increment</button>
+    </div>
+  );
 }

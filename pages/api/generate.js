@@ -6,9 +6,35 @@ const configuration = new Configuration({
 const openai = new OpenAIApi(configuration);
 
 export default async function (req, res) {
-  // Write the code 
+  try {
+    // Get the animal from the request query parameters
+    const { animal } = req.query;
+
+    // Generate the prompt using the animal
+    const prompt = generatePrompt(animal);
+
+    // Call the OpenAI API to generate the response
+    const response = await openai.complete({
+      engine: 'davinci',
+      prompt: prompt,
+      maxTokens: 100,
+      temperature: 0.7,
+      n: 1,
+      stop: '\n',
+    });
+
+    // Extract the generated text from the response
+    const generatedText = response.choices[0].text.trim();
+
+    // Send the generated text as the response
+    res.status(200).json({ generatedText });
+  } catch (error) {
+    console.error(error);
+    res.status(500).json({ error: 'An error occurred' });
+  }
 }
 
 function generatePrompt(animal) {
-  // Write the code
+  const prompt = `I want to learn more about ${animal}. Can you tell me some interesting facts about ${animal}?`;
+  return prompt;
 }
