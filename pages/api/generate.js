@@ -7,35 +7,25 @@ const openai = new OpenAIApi(configuration);
 
 export default async function (req, res) {
   try {
-    // Get the animal from the request query parameters
-    const { animal } = req.query;
+    const animal = req.body.animal;
+    const prompt = createAnimalPrompt(animal);
 
-    // Generate the prompt using the animal
-    const prompt = generatePrompt(animal);
-
-    // Call the OpenAI API to generate the response
-    const response = await openai.complete({
-      engine: 'davinci',
-      prompt: prompt,     // prompt from `generatePrompt`
-      maxTokens: 100,
-      temperature: 0.7,
-      n: 1,
-      stop: '\n',
+    const completion = await openai.createCompletion({
+      model: "text-davinci-002",
+      prompt: prompt,
+      max_tokens: 100,
+      temperature: 0.5,
     });
 
-    // Extract the generated text from the response
-    const generatedText = response.choices[0].text.trim();
-
-    // Send the generated text as the response
-    res.status(200).json({ generatedText });
+    const names = completion.data.choices[0].text.trim();
+    res.status(200).json({ petNames: names });
   } catch (error) {
-    console.error(error);
-    res.status(200).json({ result: completion.data.choices[0].text });
+    console.error('Error: ', error);
+    res.status(500).json({ message: 'Error processing your request' });
   }
 }
 
-function generatePrompt(animal) {
-  const prompt = `I want to learn more about ${animal}. Can you tell me some interesting facts about ${animal}?`;
-  console.log(prompt);
-  return prompt;
+function createAnimalPrompt(animal) {
+  const animalFormatted = animal.charAt(0).toUpperCase() + animal.slice(1).toLowerCase();
+  return `Invent unique and clever names for a ${animalFormatted} that is also a superhero. Provide a list of three names.`;
 }

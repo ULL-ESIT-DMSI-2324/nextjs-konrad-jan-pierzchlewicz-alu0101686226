@@ -1,48 +1,48 @@
 import Head from "next/head";
+import Link from "next/link";
 import { useState } from "react";
-import Image from "next/image";
 import styles from "./index.module.css";
 
 export default function Home() {
-  const [animalInput, setAnimalInput] = useState("");
-  const [result, setResult] = useState();
+  const [name, setName] = useState("");
 
-  async function onSubmit(event) {
-    event.preventDefault();
-    const response = await fetch("/api/generate", {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify({ animal: animalInput }),
-    });
-    const data = await response.json();
-    setResult(data.result);
-    setAnimalInput("");
-  }
+  const handleChange = (e) => {
+    setName(e.target.value);
+  };
 
   return (
-    <div>
+    <div className={styles.container}>
       <Head>
-        <title>OpenAI Quickstart</title>
-        <link rel="icon" href="/dog.png" />
+        <title>Inicio</title>
+        <meta name="description" content="Esta es la página de inicio de mi aplicación" />
       </Head>
 
-      <main className={styles.main}>
-        <Image alt="dog icon" src="/dog.png" width="100" height="100" className={styles.icon} />
-        <h3>Name my pet</h3>
-        <form onSubmit={onSubmit}>
-          <input
-            type="text"
-            name="animal"
-            placeholder="Enter an animal"
-            value={animalInput}
-            onChange={(e) => setAnimalInput(e.target.value)}
-          />
-          <input type="submit" value="Generate names" />
-        </form>
-        <div className={styles.result}>{result}</div>
-      </main>
-    </div>
-  );
-}
+      <h1>Bienvenido a mi aplicación</h1>
+      <p>¡Gracias por visitarnos!</p>
+
+      <input type="text" value={name} onChange={handleChange} placeholder="Ingresa tu nombre" />
+
+      <p>Hola, {name}!</p>
+
+            <nav>
+              <ul>
+                <li>
+                  <Link href="/about">
+                    <a>Acerca de</a>
+                  </Link>
+                </li>
+                <li>
+                  <Link href="/contact">
+                    <a>Contacto</a>
+                  </Link>
+                </li>
+                <li>
+                  <Link href="/pet">
+                    <a>Pet name generator. As amazing as it sounds.</a>
+                  </Link>
+                </li>
+              </ul>
+            </nav>
+          </div>
+        );
+      }
