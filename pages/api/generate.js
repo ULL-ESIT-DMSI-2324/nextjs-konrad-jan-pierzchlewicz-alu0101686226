@@ -1,5 +1,5 @@
 import OpenAI , { Configuration, OpenAIApi } from "openai";
-// kutas
+
 const configuration = new OpenAI({
   apiKey: process.env.OPENAI_API_KEY,
 });
@@ -13,7 +13,7 @@ export default async function (req, res) {
     const completion = await openai.chat.completions.create({
       model: "gpt-3.5-turbo",
       messages: [prompt],
-      max_tokens: 9,
+      max_tokens: 50,
       temperature: -1.5,
     });
 
