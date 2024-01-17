@@ -1,7 +1,8 @@
 import Head from "next/head";
-import Link from "next/link";
 import { useState } from "react";
 import styles from "./index.module.css";
+import Link from "next/link";
+
 
 export default function Home() {
   const [name, setName] = useState("");
@@ -14,31 +15,30 @@ export default function Home() {
     <div className={styles.container}>
       <Head>
         <title>Inicio</title>
-        <meta name="description" content="Esta es la página de inicio de mi aplicación" />
+        <meta name="description" content="Landing page" />
       </Head>
 
-      <h1>Bienvenido a mi aplicación</h1>
-      <p>¡Gracias por visitarnos!</p>
+      <h1>Welcome</h1>
 
-      <input type="text" value={name} onChange={handleChange} placeholder="Ingresa tu nombre" />
+      <input type="text" value={name} onChange={handleChange} placeholder="Something" />
 
       <p>Hola, {name}!</p>
 
             <nav>
               <ul>
                 <li>
-                  <Link href="/about">
-                    <a>Acerca de</a>
-                  </Link>
-                </li>
-                <li>
-                  <Link href="/contact">
-                    <a>Contacto</a>
+                  <Link href="/landing-page">
+                    <a>Landing page</a>
                   </Link>
                 </li>
                 <li>
                   <Link href="/pet">
-                    <a>Pet name generator. As amazing as it sounds.</a>
+                    <a>Pet name generator</a>
+                  </Link>
+                </li>
+                <li>
+                  <Link href="/image">
+                    <a>Pet image generator</a>
                   </Link>
                 </li>
               </ul>
