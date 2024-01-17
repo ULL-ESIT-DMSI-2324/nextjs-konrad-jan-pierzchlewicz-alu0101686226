@@ -1,31 +1,32 @@
-import OpenAI , { Configuration, OpenAIApi } from "openai";
+import OpenAI, { Configuration, OpenAIApi } from "openai";
 
-const configuration = new OpenAI({
+const openai = new OpenAI({
   apiKey: process.env.OPENAI_API_KEY,
 });
-const openai = new OpenAI(configuration);
 
 export default async function (req, res) {
-  try {
-    const animal = req.body.animal;
-    const prompt = createAnimalPrompt(animal);
-
-    const completion = await openai.chat.completions.create({
-      model: "gpt-3.5-turbo",
-      messages: [prompt],
-      max_tokens: 50,
-      temperature: -1.5,
-    });
-
-    const names = completion.data.choices[0].text.trim();
-    res.status(200).json({ petNames: names });
-  } catch (error) {
-    console.error('Error: ', error);
-    res.status(500).json({ message: 'Error, try again' });
-  }
+  const completion = await openai.chat.completions.create({
+    model: "gpt-3.5-turbo",
+    max_tokens: 7,
+    temperature: 0,
+    messages: [
+      { role: 'system', content: 'You are a helpful assistant.' },
+      { role: 'user', content: generatePrompt(req.body.animal) },
+    ],
+  });
+  console.log(completion.choices)
+  res.status(200).json({ result: completion.choices[0].message.content});
 }
 
-function createAnimalPrompt(animal) {
-  const animalFormatted = animal.charAt(0).toUpperCase() + animal.slice(1).toLowerCase();
-  return `Invent unique and clever names for a ${animalFormatted} that is also a medieval heroe. Provide a list of three names and surnames. Make one of them always "PiPo" and invent a crazy excuse as why.`;
+function generatePrompt(animal) {
+  const capitalizedAnimal =
+    animal[0].toUpperCase() + animal.slice(1).toLowerCase();
+  return `Suggest three names for an animal that is a superhero.
+
+Animal: Cat
+Names: Captain Sharpclaw, Agent Fluffball, The Incredible Feline
+Animal: Dog
+Names: Ruff the Protector, Wonder Canine, Sir Barks-a-Lot
+Animal: ${capitalizedAnimal}
+Names:`;
 }
