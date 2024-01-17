@@ -14,15 +14,15 @@ export default function Home() {
   return (
     <div className={styles.container}>
       <Head>
-        <title>Inicio</title>
+        <title>Start</title>
         <meta name="description" content="Landing page" />
       </Head>
 
       <h1>Welcome</h1>
 
-      <input type="text" value={name} onChange={handleChange} placeholder="Something" />
+      <input type="text" value={name} onChange={handleChange} placeholder="Write your name" />
 
-      <p>Hola, {name}!</p>
+      <p>Welcome {name}!</p>
 
             <nav>
               <ul>

@@ -1,9 +1,9 @@
 import OpenAI , { Configuration, OpenAIApi } from "openai";
-
-const configuration = new Configuration({
-  apiKey: process.env.OPENAI_API_KEY
+// kutas
+const configuration = new OpenAI({
+  apiKey: process.env.OPENAI_API_KEY,
 });
-const openai = new OpenAIApi(configuration);
+const openai = new OpenAI(configuration);
 
 export default async function (req, res) {
   try {
@@ -13,7 +13,7 @@ export default async function (req, res) {
     const completion = await openai.chat.completions.create({
       model: "gpt-3.5-turbo",
       messages: [prompt],
-      max_tokens: 50,
+      max_tokens: 9,
       temperature: -1.5,
     });
 
@@ -21,11 +21,11 @@ export default async function (req, res) {
     res.status(200).json({ petNames: names });
   } catch (error) {
     console.error('Error: ', error);
-    res.status(500).json({ message: 'Error, please try again' });
+    res.status(500).json({ message: 'Error, try again' });
   }
 }
 
 function createAnimalPrompt(animal) {
-  const animalPrompt = animal.charAt(0).toUpperCase() + animal.slice(1).toLowerCase();
-  return `Think of a name for an ${animalPrompt}, the ${animalPrompt} is also a firefighter. Provide a list of three names and surnames.`;
+  const animalFormatted = animal.charAt(0).toUpperCase() + animal.slice(1).toLowerCase();
+  return `Invent unique and clever names for a ${animalFormatted} that is also a medieval heroe. Provide a list of three names and surnames. Make one of them always "PiPo" and invent a crazy excuse as why.`;
 }
