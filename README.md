@@ -4,6 +4,8 @@
 # Project Overview
 The primary objective is to build a Node.js application using the Next.js framework and seamlessly integrate it with OpenAI's API.
 
+![thunder-client](./img/thunder-request.png)
+
 # Features
 
 1. Pet Name Generation: Users could input an animal type and receive generated names for their pets.

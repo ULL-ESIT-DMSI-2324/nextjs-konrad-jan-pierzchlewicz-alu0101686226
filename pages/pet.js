@@ -23,14 +23,18 @@ export default function Home() {
   }
 
   return (
-    <div>
+    <div className={styles.container}>
       <Head>
-        <title>Pet name generator?</title>
+        <title>Pet Name Generator</title>
         <link rel="icon" href="/favicon.ico" />
+        <link
+          rel="stylesheet"
+          href="https://fonts.googleapis.com/css2?family=Quicksand:wght@400;700&display=swap"
+        />
       </Head>
 
       <main className={styles.main}>
-        <h1>Pet name generator</h1>
+        <h1 className={styles.title}>Pet Name Generator</h1>
         <form onSubmit={onSubmit} className={styles.form}>
           <input
             type="text"
@@ -38,11 +42,53 @@ export default function Home() {
             placeholder="Write something related to animals"
             value={animalInput}
             onChange={(e) => setAnimalInput(e.target.value)}
+            className={styles.input}
           />
-          <button type="submit">Generate a name</button>
+          <button type="submit" className={styles.button}>
+            Generate a name
+          </button>
         </form>
-        {result && <div className={styles.result}> {result}</div>}
+        {result && <div className={styles.result}>{result}</div>}
       </main>
+
+      <style jsx>{`
+        .container {
+          max-width: 800px;
+          margin: 0 auto;
+          padding: 40px;
+          text-align: center;
+          font-family: 'Quicksand', sans-serif;
+        }
+
+        .title {
+          font-size: 2.5em;
+          color: #333;
+          margin-bottom: 20px;
+        }
+
+        .form {
+          margin-bottom: 30px;
+        }
+
+        .input {
+          width: 100%;
+          padding: 10px;
+          font-size: 1em;
+        }
+
+        .button {
+          background-color: #1e90ff;
+          color: #fff;
+          padding: 10px 15px;
+          font-size: 1em;
+          cursor: pointer;
+        }
+
+        .result {
+          font-size: 1.2em;
+          color: #555;
+        }
+      `}</style>
     </div>
   );
 }

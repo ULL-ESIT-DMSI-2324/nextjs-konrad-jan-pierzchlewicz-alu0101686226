@@ -18,31 +18,40 @@ export default function Home() {
         <meta name="description" content="Landing page" />
       </Head>
 
-      <h1>Welcome</h1>
+      <div className={styles.mainContent}>
+        <h1 className={styles.title}>Welcome</h1>
 
-      <input type="text" value={name} onChange={handleChange} placeholder="Write your name" />
+        <input
+          type="text"
+          value={name}
+          onChange={handleChange}
+          placeholder="Write your name"
+          className={styles.input}
+        />
 
-      <p>Welcome {name}!</p>
+        <p className={styles.greeting}>Welcome {name || 'guest'}!</p>
 
-            <nav>
-              <ul>
-                <li>
-                  <Link href="/landing-page">
-                    <a>Landing page</a>
-                  </Link>
-                </li>
-                <li>
-                  <Link href="/pet">
-                    <a>Pet name generator</a>
-                  </Link>
-                </li>
-                <li>
-                  <Link href="/image">
-                    <a>Pet image generator</a>
-                  </Link>
-                </li>
-              </ul>
-            </nav>
-          </div>
-        );
-      }
+        <nav className={styles.navigation}>
+          <ul>
+            <li>
+              <Link href="/landing-page">
+                <a>Landing page</a>
+              </Link>
+            </li>
+            <li>
+              <Link href="/pet">
+                <a>Pet name generator</a>
+              </Link>
+            </li>
+            <li>
+              <Link href="/image">
+                <a>Pet image generator</a>
+              </Link>
+            </li>
+          </ul>
+        </nav>
+      </div>
+    </div>
+  );
+};
+

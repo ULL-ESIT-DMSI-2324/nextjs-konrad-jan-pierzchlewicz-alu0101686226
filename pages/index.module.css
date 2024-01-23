@@ -1,11 +1,12 @@
+/* Define the custom font face */
 @font-face {
   font-family: "ColfaxAI";
-  src: url(https://cdn.openai.com/API/fonts/ColfaxAIRegular.woff2)
-      format("woff2"),
+  src: url(https://cdn.openai.com/API/fonts/ColfaxAIRegular.woff2) format("woff2"),
     url(https://cdn.openai.com/API/fonts/ColfaxAIRegular.woff) format("woff");
   font-weight: normal;
   font-style: normal;
 }
+
 @font-face {
   font-family: "ColfaxAI";
   src: url(https://cdn.openai.com/API/fonts/ColfaxAIBold.woff2) format("woff2"),
@@ -13,6 +14,8 @@
   font-weight: bold;
   font-style: normal;
 }
+
+/* Apply the custom font to main and input elements */
 .main,
 .main input {
   font-size: 16px;
@@ -20,15 +23,21 @@
   color: #353740;
   font-family: "ColfaxAI", Helvetica, sans-serif;
 }
+
+/* Style the main container */
 .main {
   display: flex;
   flex-direction: column;
   align-items: center;
   padding-top: 60px;
 }
+
+/* Style the icon */
 .main .icon {
   width: 34px;
 }
+
+/* Style the heading */
 .main h3 {
   font-size: 32px;
   line-height: 40px;
@@ -36,21 +45,29 @@
   color: #202123;
   margin: 16px 0 40px;
 }
+
+/* Style the form */
 .main form {
   display: flex;
   flex-direction: column;
   width: 320px;
 }
+
+/* Style the text input */
 .main input[type="text"] {
   padding: 12px 16px;
   border: 1px solid #10a37f;
   border-radius: 4px;
   margin-bottom: 24px;
 }
+
+/* Style the placeholder text */
 .main ::placeholder {
   color: #8e8ea0;
   opacity: 1;
 }
+
+/* Style the submit button */
 .main input[type="submit"] {
   padding: 12px 0;
   color: #fff;
@@ -60,6 +77,8 @@
   text-align: center;
   cursor: pointer;
 }
+
+/* Style the result text */
 .main .result {
   font-weight: bold;
   margin-top: 40px;
