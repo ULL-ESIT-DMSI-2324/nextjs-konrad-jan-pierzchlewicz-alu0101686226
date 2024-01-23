@@ -25,21 +25,21 @@ export default function Home() {
   return (
     <div>
       <Head>
-        <title>DMSI LAB: Generador de Imágenes de Animales</title>
+        <title>Image generator</title>
         <link rel="icon" href="/favicon.ico" />
       </Head>
 
       <main className={styles.main}>
-        <h1>Generador de Imágenes de Animales</h1>
+        <h1>Image generator</h1>
         <form onSubmit={onSubmit} className={styles.form}>
           <input
             type="text"
             name="animal"
-            placeholder="Escribe un animal"
+            placeholder="Description of an animal"
             value={animalInput}
             onChange={(e) => setAnimalInput(e.target.value)}
           />
-          <button type="submit">Generar Imagen</button>
+          <button type="submit">Generate an image!</button>
         </form>
         {imageURL && <img src={imageURL} className={styles.animalImage} alt="Animal Image" />}
       </main>
