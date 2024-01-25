@@ -5,6 +5,8 @@
 The primary objective is to build a Node.js application using the Next.js framework and seamlessly integrate it with OpenAI's API.
 Below is an example of a request to the OpenAI API using the Thunder Client extension in VSCode.
 
+![thunder-client](./img/thunder-request.png)
+
 All requestst:
   - Get all models.
   - Obtain information from a model.
@@ -12,7 +14,6 @@ All requestst:
   - Obtain a completion.
   - Get a moderation.
 
-![thunder-client](./img/thunder-request.png)
 
 # Deployment in Netlify
 
@@ -39,9 +40,13 @@ api: Hosts backend logic for interacting with the OpenAI API.
 
 public: Stores static assets like images and icons.
 
-docs: Houses documentation and images explaining various aspects of the project.
-
 styles: Includes CSS modules for styling the application.
+
+# Dynamic Routes
+
+The application doesn't use dynamic routes to generate pet names and fetch images. But theoretical funcitionality of dynamic routes would be as presented:
+1. The pet name generator page uses the animal type as a query parameter to generate pet names. 
+2. The image fetcher page uses the animal name as a query parameter to fetch images.
 
 # Problems encountered
 
